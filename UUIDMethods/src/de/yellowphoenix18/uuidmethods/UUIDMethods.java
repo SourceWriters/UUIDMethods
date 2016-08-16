@@ -13,7 +13,7 @@ public class UUIDMethods extends JavaPlugin {
 	public static int port = 3306;
 	public static String username = "username";
 	public static String password = "password";
-	public static String database = "SkyWars";
+	public static String database = "database";
 	public static boolean enabled = false;
 	
 	public void onEnable() {
