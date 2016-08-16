@@ -1,0 +1,9 @@
+name: UUIDMethods
+version: 1.6
+author: YellowPhoenix18
+
+main: de.yellowphoenix18.uuidmethods.main.UUIDMethods
+
+commands:   
+  uuidmethods:
+   
