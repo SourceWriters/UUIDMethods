@@ -6,4 +6,5 @@ main: de.yellowphoenix18.uuidmethods.UUIDMethods
 
 commands:   
   uuidmethods:
+  description: MainCommand
    
