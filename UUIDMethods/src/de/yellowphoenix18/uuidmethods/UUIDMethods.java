@@ -15,6 +15,7 @@ public class UUIDMethods extends JavaPlugin {
 	public static String password = "password";
 	public static String database = "database";
 	public static boolean enabled = false;
+	public static boolean storelocal = true;
 	
 	public void onEnable() {
 		m = this;

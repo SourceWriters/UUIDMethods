@@ -12,6 +12,7 @@ import org.bukkit.event.player.PlayerLoginEvent;
 import de.yellowphoenix18.uuidmethods.UUIDMethods;
 import de.yellowphoenix18.uuidmethods.database.UUIDDatabase;
 import de.yellowphoenix18.uuidmethods.fetcher.OldUsernameFetcher;
+import de.yellowphoenix18.uuidmethods.localstorage.LocalStorage;
 
 public class UUIDListener implements Listener {
 	
@@ -36,7 +37,10 @@ public class UUIDListener implements Listener {
 					}				
 				}			
 			});
-		}		
+		}
+		if(UUIDMethods.storelocal == true) {
+			LocalStorage.set(Username, UUID);
+		}
 	}
 	
 	@EventHandler

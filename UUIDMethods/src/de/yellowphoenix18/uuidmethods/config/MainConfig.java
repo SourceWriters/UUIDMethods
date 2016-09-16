@@ -36,6 +36,9 @@ public class MainConfig {
 		}	
 		if(cfg.getBoolean("Settings.Debug") == false) {	    
 		    cfg.set("Settings.Debug", false);
+		}	
+		if(!cfg.contains("Config.StoreLocal")) {	    
+		    cfg.set("Config.StoreLocal", true);
 		}
 		
 		try {
@@ -50,6 +53,7 @@ public class MainConfig {
 		UUIDMethods.database = cfg.getString("MYSQL.Database");
 		UUIDMethods.port = cfg.getInt("MYSQL.Port");
 		UUIDMethods.enabled = cfg.getBoolean("MYSQL.Enabled");
+		UUIDMethods.storelocal = cfg.getBoolean("Config.StoreLocal");
 		debug = cfg.getBoolean("Settings.Debug");
 	}
 

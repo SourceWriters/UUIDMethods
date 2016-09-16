@@ -5,10 +5,12 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.UUID;
 
+import de.yellowphoenix18.uuidmethods.UUIDMethods;
 import de.yellowphoenix18.uuidmethods.cache.Cache;
 import de.yellowphoenix18.uuidmethods.database.UUIDDatabase;
 import de.yellowphoenix18.uuidmethods.fetcher.OldUsernameFetcher;
 import de.yellowphoenix18.uuidmethods.fetcher.UUIDFetcher;
+import de.yellowphoenix18.uuidmethods.localstorage.LocalStorage;
 import de.yellowphoenix18.uuidmethods.status.MojangStatus;
 
 
@@ -24,12 +26,23 @@ public class UUIDAPI {
 		return Username;
 	}
 	
+	public static String getUsernameLocal(String UUID) {
+		String username = null;
+		if(UUIDMethods.storelocal == true) {
+			username = LocalStorage.getUsername(UUID);
+		}
+		return username;
+	}
+	
 	public static String getUsernameMojang(String UUID) {
 		String Username = null;		
 		UUIDFetcher fetcher = new UUIDFetcher(Arrays.asList("xxx"));
 		try {
 			Username = fetcher.getUsername(UUID);
 			UUIDDatabase.setData(UUID, Username);
+			if(UUIDMethods.storelocal == true) {
+				LocalStorage.set(Username, UUID);
+			}
 			OldUsernameFetcher.storeData(UUID);
 			return Username;
 		} catch (Exception e) {
@@ -46,6 +59,11 @@ public class UUIDAPI {
 			try {
 				if(MojangOnline() == false) {
 					Username = getUsernameDatabase(UUID);
+					if(Username == null) {
+						if(UUIDMethods.storelocal == true) {
+							Username = LocalStorage.getUsername(UUID);
+						}
+					}
 				} else {
 					Username = getUsernameMojang(UUID);
 					UUIDDatabase.setData(UUID, Username);
@@ -66,6 +84,11 @@ public class UUIDAPI {
 			try {
 				if(MojangOnline() == false) {
 					Username = getUsernameDatabase(UUID);
+					if(Username == null) {
+						if(UUIDMethods.storelocal == true) {
+							Username = LocalStorage.getUsername(UUID);
+						}
+					}
 				} else {
 					Username = getUsernameMojang(UUID);
 					UUIDDatabase.setData(UUID, Username);
@@ -80,6 +103,14 @@ public class UUIDAPI {
 			return Username;
 	}
 	
+	public static String getUUIDLocal(String Username) {
+		String uuid = null;
+		if(UUIDMethods.storelocal == true) {
+			uuid = LocalStorage.getUUID(Username);
+		}
+		return uuid;
+	}
+	
 	public static String getUUIDMojang(String Username) {
 		String UUID = null;
 		UUIDFetcher fetcher = new UUIDFetcher(Arrays.asList(Username));
@@ -88,6 +119,9 @@ public class UUIDAPI {
 			response = fetcher.call();
 			if(response.containsKey(Username)) {
 				UUID = response.get(Username).toString();
+				if(UUIDMethods.storelocal == true) {
+					LocalStorage.set(Username, UUID);
+				}
 				UUIDDatabase.setData(UUID, Username);
 				OldUsernameFetcher.storeData(UUID);
 			}
@@ -146,6 +180,11 @@ public class UUIDAPI {
 			try {
 				if(MojangOnline() == false) {
 					UUID = getUUIDDatabase(Username);
+					if(UUID == null) {
+						if(UUIDMethods.storelocal == true) {
+							UUID = LocalStorage.getUUID(Username);
+						}
+					}
 				} else {
 					UUID = getUUIDMojang(Username);
 					UUIDDatabase.setData(UUID, Username);
@@ -177,6 +216,11 @@ public class UUIDAPI {
 			try {
 				if(MojangOnline() == false) {
 					UUID = getUUIDDatabase(Username);
+					if(UUID == null) {
+						if(UUIDMethods.storelocal == true) {
+							UUID = LocalStorage.getUUID(Username);
+						}
+					}
 				} else {
 					UUID = getUUIDMojang(Username);
 					UUIDDatabase.setData(UUID, Username);
