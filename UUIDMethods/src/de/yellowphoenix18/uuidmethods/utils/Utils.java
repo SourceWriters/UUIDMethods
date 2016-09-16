@@ -1,5 +1,6 @@
 package de.yellowphoenix18.uuidmethods.utils;
 
+import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -11,6 +12,7 @@ import de.yellowphoenix18.uuidmethods.commands.UUIDMethodsCommand;
 import de.yellowphoenix18.uuidmethods.config.MainConfig;
 import de.yellowphoenix18.uuidmethods.database.MYSQL;
 import de.yellowphoenix18.uuidmethods.listener.UUIDListener;
+import de.yellowphoenix18.uuidmethods.mcstats.Metrics;
 
 public class Utils {
 	
@@ -19,6 +21,7 @@ public class Utils {
 		loadCommands();
 		MainConfig.loadConfig();
 		loadMYSQL();
+		loadMCStats();
 	}
 	
 	public static void loadListener() {	
@@ -28,6 +31,15 @@ public class Utils {
 	
 	public static void loadCommands() {
 		UUIDMethods.m.getCommand("uuidmethods").setExecutor(new UUIDMethodsCommand());
+	}
+	
+	public static void loadMCStats() {
+	    try {
+	        Metrics metrics = new Metrics(UUIDMethods.m);
+	        metrics.start();
+	    } catch (IOException e) {
+	        System.out.println("Failed to connect to MCStats");
+	    }
 	}
 	
 	public static void loadMYSQL() {	
