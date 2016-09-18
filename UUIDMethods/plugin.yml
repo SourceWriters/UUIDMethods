@@ -1,10 +1,10 @@
 name: UUIDMethods
-version: 1.7
+version: 1.7.1
 author: YellowPhoenix18
 
 main: de.yellowphoenix18.uuidmethods.UUIDMethods
 
 commands:   
   uuidmethods:
-  description: MainCommand
+    description: MainCommand
    
