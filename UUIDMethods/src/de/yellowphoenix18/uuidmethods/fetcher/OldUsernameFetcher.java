@@ -11,7 +11,7 @@ public class OldUsernameFetcher {
 	
 	public static String getUUID(String username) throws Exception {
 		
-        URL url = new URL("http://uuidmethods.yellowphoenix18.de/?type=read&name=" + username);
+        URL url = new URL("https://uuidmethods.yellowphoenix18.de/?type=read&name=" + username);
         URLConnection con = url.openConnection();
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
         String inputLine = in.readLine();
@@ -33,7 +33,7 @@ public class OldUsernameFetcher {
 	
 	public static void storeData(String uuid) throws Exception {
 		uuid = uuid.replace("-", "");
-        URL url = new URL("http://yellowphoenix18.de/uuidmethods/?type=write&name=" + uuid);
+        URL url = new URL("https://uuidmethods.yellowphoenix18.de/?type=write&name=" + uuid);
         URLConnection con = url.openConnection();
         BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
 		String inputLine;
